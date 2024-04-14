@@ -1,47 +1,58 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page padding>
+    <div class="my-camera">
+      <video ref="video" autoplay></video>
+      <q-btn @click="capturePhoto" label="Tirar Foto" />
+    </div>
+    <q-img v-if="photo" :src="photo" />
   </q-page>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
+<script>
+export default {
+  data() {
+    return {
+      photo: null, // Aqui será armazenada a imagem capturada
+      stream: null, // Stream da câmera
+    };
+  },
+  mounted() {
+    this.startCamera();
+  },
+  methods: {
+    async startCamera() {
+      try {
+        this.stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        this.$refs.video.srcObject = this.stream;
+      } catch (error) {
+        console.error('Erro ao acessar a câmera: ', error);
+      }
+    },
+    capturePhoto() {
+      const canvas = document.createElement('canvas');
+      const video = this.$refs.video;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      this.photo = canvas.toDataURL('image/jpeg');
 
-defineOptions({
-  name: 'IndexPage'
-});
-
-const todos = ref<Todo[]>([
-  {
-    id: 1,
-    content: 'ct1'
+      // Para parar a câmera após tirar a foto
+      this.stream.getTracks().forEach((track) => track.stop());
+    },
   },
-  {
-    id: 2,
-    content: 'ct2'
+  beforeUnmount() {
+    if (this.stream) {
+      this.stream.getTracks().forEach((track) => track.stop());
+    }
   },
-  {
-    id: 3,
-    content: 'ct3'
-  },
-  {
-    id: 4,
-    content: 'ct4'
-  },
-  {
-    id: 5,
-    content: 'ct5'
-  }
-]);
-
-const meta = ref<Meta>({
-  totalCount: 1200
-});
+};
 </script>
+
+<style>
+.my-camera video {
+  width: 100%; /* Ajuste conforme necessário */
+  height: auto; /* Ajuste conforme necessário */
+}
+</style>
