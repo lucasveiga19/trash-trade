@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex container">
+  <q-page class="flex container" padding>
     <div class="text-labelLogin">Login</div>
     <div class="text-BotaoRedirecionar">
       <q-btn flat label="Cadastro" @click="onCadastroClick" />
@@ -36,9 +36,10 @@
     </div>
 
     <q-form @submit="onSubmit">
+      <q-input filled v-model="name" label="Primeiro Nome" />
       <q-input
         filled
-        v-model="name"
+        v-model="matricula"
         class="text-labelMatricula"
         label="Matrícula"
       />
@@ -70,6 +71,7 @@ export default {
   data() {
     return {
       name: '',
+      matricula: '',
       password: '',
       showPassword: false,
     };

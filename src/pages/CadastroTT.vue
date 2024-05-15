@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex container">
+  <q-page class="flex container" padding>
     <div class="text-labelCadastro">Cadastro</div>
     <div class="text-BotaoRedirecionar">
       <q-btn flat label="Login" @click="onLoginClick" />
@@ -36,9 +36,10 @@
     </div>
 
     <q-form @submit="onSubmit">
+      <q-input filled v-model="name" label="Primeiro Nome" />
       <q-input
         filled
-        v-model="name"
+        v-model="matricula"
         class="text-labelMatricula"
         label="Matrícula"
       />
@@ -79,7 +80,7 @@ export default {
       // Lógica para submeter o formulário
     },
     onLoginClick() {
-     this.$router.push('/login');
+      this.$router.push('/login');
     },
   },
 };
