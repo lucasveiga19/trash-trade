@@ -10,6 +10,7 @@ const routes: RouteRecordRaw[] = [
       { path: 'login', component: () => import('pages/LoginTT.vue') },
       { path: 'home', component: () => import('pages/HomeTT.vue') },
       { path: 'recompensa', component: () => import('pages/RecompensaTT.vue') },
+      { path: 'registro', component: () => import('pages/RegistroTT.vue') },
     ],
   },
 
