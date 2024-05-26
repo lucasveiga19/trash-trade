@@ -1,6 +1,11 @@
 <template>
-  <q-page class="flex container2">
-    <div class="text-labelTituloHome">Olá, Laldiane!</div>
+  <q-page class="flex container2 jsenabled" padding :key="renderKey">
+    <div class="text-labelTituloHome">Olá, {{ userName }}!</div>
+    <div class="text-labelTituloCoins">Trashcoins: {{ userScore }}</div>
+    <div class="text-labelTituloAguardo">
+      Em aprovação: {{ userScoreToApprove }}
+    </div>
+
     <div class="logoPerfil">
       <svg
         width="86"
@@ -2104,7 +2109,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+  props: ['matricula'],
+  data() {
+    return {
+      userName: 'Aguarde',
+      userScore: 0,
+      userScoreToApprove: 0,
+      renderKey: 0,
+    };
+  },
   methods: {
     onRegistroClick() {
       this.$router.push('/registro');
@@ -2112,6 +2128,57 @@ export default {
     onRecompensaClick() {
       this.$router.push('/recompensa');
     },
+    fetchUserData() {
+      axios
+        .get('https://trashtrade.onrender.com/api/user')
+        .then((response) => {
+          console.log('Dados recebidos:', response.data); // Log da resposta completa
+          console.log(this.$store.getters.getMatricula);
+
+          const userData = response.data.find(
+            (user) =>
+              user.registration.toString() ===
+              this.$store.getters.getMatricula.toString()
+          ); // Garanta que os tipos de dados são comparáveis
+          if (userData) {
+            this.userName = userData.name;
+            this.userScore = userData.score ? userData.score : 0;
+            this.userScoreToApprove = userData.scoreToApprove
+              ? userData.scoreToApprove
+              : 0;
+            this.renderKey++;
+            console.log('Consulta realizada com sucesso');
+          } else {
+            console.log(
+              'Nenhum usuário encontrado com a matrícula fornecida:',
+              this.$store.getters.getMatricula
+            );
+          }
+        })
+        .catch((error) => {
+          console.error('Erro na requisição:', error);
+        });
+    },
+  },
+  mounted() {
+    this.fetchUserData();
+  },
+  watch: {
+    'store.getters.getMatricula': function (newMatricula) {
+      this.fetchUserData(newMatricula);
+    },
   },
 };
 </script>
+
+<style>
+.q-page-container {
+  background-color: #5db075;
+  background: #5db075;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+</style>

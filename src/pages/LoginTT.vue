@@ -54,8 +54,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      matricula: '',
-      showPassword: false,
+      matricula: ''
     };
   },
   methods: {
@@ -93,6 +92,7 @@ export default {
           message: 'Login realizado com sucesso!',
         });
 
+        this.$store.dispatch('updateMatricula', this.matricula);
         this.$router.push('/home');
       } catch (error) {
         console.error('Axios Error:', error);

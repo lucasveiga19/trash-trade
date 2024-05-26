@@ -102,6 +102,7 @@ export default {
           message: 'Cadastro realizado com sucesso!',
         });
 
+        this.$store.dispatch('updateMatricula', this.matricula);
         this.$router.push('/home');
       } catch (error) {
         console.error('Axios Error:', error);

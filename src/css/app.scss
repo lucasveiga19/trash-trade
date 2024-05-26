@@ -49,7 +49,7 @@
 
 .text-BotaoRegistro {
   position: absolute;
-  margin-top: -350px;
+  margin-top: -290px;
   font-family: 'Inter', sans-serif;
   font-variation-settings: 'slnt' 0;
   font-style: bold;
@@ -68,7 +68,7 @@
 
 .text-BotaoRecompensas {
   position: absolute;
-  margin-top: -10px;
+  margin-top: 50px;
   font-family: 'Inter', sans-serif;
   font-variation-settings: 'slnt' 0;
   font-style: bold;
@@ -143,7 +143,7 @@
 
 .imagemHome {
   position: absolute;
-  margin-top: 500px;
+  margin-top: 530px;
 }
 
 .q-input {
@@ -196,7 +196,7 @@
 
 .text-labelTituloHome {
   position: absolute;
-  margin-top: -660px;
+  margin-top: -690px;
   font-family: 'Inter', sans-serif;
   font-optical-sizing: auto;
   font-variation-settings: 'slnt' 0;
@@ -207,6 +207,40 @@
   text-align: left;
   color: white;
   width: 160px;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.text-labelTituloCoins {
+  position: absolute;
+  margin-top: -560px;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'slnt' 0;
+  font-style: bold;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 36px;
+  text-align: left;
+  color: white;
+  width: 330px;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.text-labelTituloAguardo {
+  position: absolute;
+  margin-top: -500px;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'slnt' 0;
+  font-style: bold;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 36px;
+  text-align: left;
+  color: rgba(241, 241, 241, 0.795);
+  width: 330px;
   max-width: 100%;
   white-space: nowrap;
 }
