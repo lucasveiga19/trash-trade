@@ -36,29 +36,11 @@
     </div>
 
     <q-form @submit="onSubmit">
-      <q-input filled v-model="name" label="Primeiro Nome" />
       <q-input
         filled
         v-model="matricula"
         class="text-labelMatricula"
         label="Matrícula"
-      />
-      <q-input
-        filled
-        v-model="password"
-        label="Senha"
-        class="text-labelSenha"
-        :append-slot="{
-          content: [
-            {
-              icon: showPassword ? 'visibility_off' : 'visibility',
-              handler: () => {
-                showPassword = !showPassword;
-              },
-            },
-          ],
-        }"
-        :type="showPassword ? 'text' : 'password'"
       />
 
       <q-btn label="Login" type="submit" class="full-width" />

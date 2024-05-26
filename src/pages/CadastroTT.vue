@@ -43,23 +43,6 @@
         class="text-labelMatricula"
         label="Matrícula"
       />
-      <q-input
-        filled
-        v-model="password"
-        label="Senha"
-        class="text-labelSenha"
-        :append-slot="{
-          content: [
-            {
-              icon: showPassword ? 'visibility_off' : 'visibility',
-              handler: () => {
-                showPassword = !showPassword;
-              },
-            },
-          ],
-        }"
-        :type="showPassword ? 'text' : 'password'"
-      />
 
       <q-btn label="Cadastro" type="submit" class="full-width" />
     </q-form>
@@ -67,17 +50,83 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       name: '',
-      password: '',
-      showPassword: false,
+      matricula: '',
     };
   },
   methods: {
-    onSubmit() {
-      // Lógica para submeter o formulário
+    async onSubmit() {
+      try {
+        // Primeiro verifica se já existe o registro
+        const checkResponse = await axios.get(
+          'https://trashtrade.onrender.com/api/user'
+        );
+
+        const userExists = checkResponse.data.some((user) => {
+          console.log('Comparando:', user.registration, this.matricula); // Log da comparação
+          return user.registration.toString() === this.matricula;
+        });
+
+        if (userExists) {
+          this.$q.notify({
+            color: 'orange-4',
+            textColor: 'white',
+            icon: 'warning',
+            message: 'Usuário já registrado!',
+          });
+          return;
+        }
+
+        const response = await axios.post(
+          'https://trashtrade.onrender.com/api/user',
+          {
+            registration: this.matricula,
+            name: this.name,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        console.log('Success:', response);
+        this.$q.notify({
+          color: 'green-4',
+          textColor: 'white',
+          icon: 'cloud_done',
+          message: 'Cadastro realizado com sucesso!',
+        });
+
+        this.$router.push('/home');
+      } catch (error) {
+        console.error('Axios Error:', error);
+        this.$q.notify({
+          color: 'red-5',
+          textColor: 'white',
+          icon: 'error',
+          message: 'Erro ao realizar o cadastro.',
+        });
+        if (error.response) {
+          // O servidor respondeu com um status fora do intervalo 2xx
+          console.log('Response data:', error.response.data);
+          console.log('Response status:', error.response.status);
+          console.log('Response headers:', error.response.headers);
+          alert('Erro no servidor: ' + error.response.status);
+        } else if (error.request) {
+          // A requisição foi feita mas não houve resposta
+          console.log('No response:', error.request);
+          alert('Nenhuma resposta do servidor.');
+        } else {
+          // Algo aconteceu na configuração da requisição que disparou um erro
+          console.log('Error Message:', error.message);
+          alert('Erro ao fazer a requisição: ' + error.message);
+        }
+      }
     },
     onLoginClick() {
       this.$router.push('/login');
