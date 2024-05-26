@@ -49,18 +49,94 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      name: '',
       matricula: '',
-      password: '',
       showPassword: false,
     };
   },
   methods: {
-    onSubmit() {
-      // Lógica para submeter o formulário
+    async onSubmit() {
+      try {
+        const checkResponse = await axios.post(
+          'https://trashtrade.onrender.com/api/login',
+          {
+            registration: this.matricula,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        const userExists = checkResponse.data.token.toString() === null;
+
+        if (userExists) {
+          this.$q.notify({
+            color: 'orange-4',
+            textColor: 'white',
+            icon: 'warning',
+            message: 'Usuário não registrado!',
+          });
+          return;
+        }
+
+        console.log('Success:', checkResponse);
+        this.$q.notify({
+          color: 'green-4',
+          textColor: 'white',
+          icon: 'cloud_done',
+          message: 'Login realizado com sucesso!',
+        });
+
+        this.$router.push('/home');
+      } catch (error) {
+        console.error('Axios Error:', error);
+        if (error.response) {
+          // O servidor respondeu com um status fora do intervalo 2xx
+          console.log('Response data:', error.response.data);
+          console.log('Response status:', error.response.status);
+          console.log('Response headers:', error.response.headers);
+          if (error.response.status === 401) {
+            this.$q.notify({
+              color: 'orange-4',
+              textColor: 'white',
+              icon: 'warning',
+              message: 'Usuário não registrado!',
+            });
+            return;
+          } else {
+            this.$q.notify({
+              color: 'red-5',
+              textColor: 'white',
+              icon: 'error',
+              message: 'Erro no servidor: ' + error.response.status,
+            });
+          }
+        } else if (error.request) {
+          // A requisição foi feita mas não houve resposta
+          console.log('No response:', error.request);
+          this.$q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'error',
+            message: 'Nenhuma resposta do servidor.',
+          });
+        } else {
+          // Algo aconteceu na configuração da requisição que disparou um erro
+          console.log('Error Message:', error.message);
+          this.$q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'error',
+            message: 'Erro ao fazer a requisição: ' + error.message,
+          });
+        }
+      }
     },
     onCadastroClick() {
       this.$router.push('/');
