@@ -14,8 +14,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
   width: 100vw;
+  overflow-y: auto;
 }
 
 .text-labelCadastro,
@@ -271,19 +272,27 @@
 }
 
 .centered-square-Recompensa {
+  margin-top: -160px;
   width: 400px;
-  height: 710px;
+  height: 530px;
   background-color: white;
   border-radius: 40px;
 }
 
+.centered-square-Duvidas{
+  margin-top: 530px;
+  width: 400px;
+  height: 120px;
+  position: absolute;
+}
+
 .text-Premios {
   position: absolute;
-  margin-top: -400px;
+  margin-top: -600px;
   font-family: 'Inter', sans-serif;
   font-variation-settings: 'slnt' 0;
   font-style: bold;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 40px;
   text-align: center;
   color: #5db075;
@@ -300,70 +309,26 @@
   position: absolute;
   align-items: center;
   justify-content: center;
-  margin-top: -200px;
+  margin-top: -90px;
 }
 
 .centered-square-Premios {
   width: 360px;
-  height: 90px;
+  height: 290px;
   background-color: #5db075;
   border-radius: 20px;
 }
 
-.container-Premios1 {
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.centered-square-Premios1 {
-  width: 360px;
-  height: 90px;
-  background-color: #5db075;
-  border-radius: 20px;
-}
-
-.container-Premios2 {
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  margin-top: 260px;
-}
-
-.centered-square-Premios2 {
-  width: 360px;
-  height: 90px;
-  background-color: #5db075;
-  border-radius: 20px;
-}
-
-.container-Premios3 {
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  margin-top: 490px;
-}
-
-.centered-square-Premios3 {
-  width: 360px;
-  height: 90px;
-  background-color: #5db075;
-  border-radius: 20px;
-}
-
-.container-Premios4 {
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  margin-top: 720px;
-}
-
-.centered-square-Premios4 {
-  width: 360px;
-  height: 90px;
-  background-color: #5db075;
-  border-radius: 20px;
+.centered-Duvidas{
+  color: $secondary;
+  font-family: 'Inter', sans-serif;
+  font-variation-settings: 'slnt' 0;
+  font-style: bold;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 40px;
+  margin-top: 10px;
 }
 
 .Camera {
