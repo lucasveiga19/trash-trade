@@ -173,7 +173,7 @@ export default {
       }
       try {
         this.stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: { facingMode: 'environment' } // Prefere usar a câmera traseira
         });
         this.$refs.video.srcObject = this.stream;
       } catch (error) {

@@ -60,6 +60,14 @@ export default {
   methods: {
     async onSubmit() {
       try {
+        this.$q.notify({
+          color: 'orange-4',
+          textColor: 'white',
+          icon: 'warning',
+          message: 'Aguarde! Tem muita gente reciclando',
+          timeout: 3000,
+        });
+
         const checkResponse = await axios.post(
           'https://trashtrade.onrender.com/api/login',
           {

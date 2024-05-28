@@ -62,6 +62,14 @@ export default {
   methods: {
     async onSubmit() {
       try {
+        this.$q.notify({
+          color: 'orange-4',
+          textColor: 'white',
+          icon: 'warning',
+          message: 'Aguarde! Tem muita gente reciclando',
+          timeout: 3000,
+        });
+
         // Primeiro verifica se já existe o registro
         const checkResponse = await axios.get(
           'https://trashtrade.onrender.com/api/user'
