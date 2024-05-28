@@ -335,11 +335,58 @@
   border-radius: 20px;
   width: 100%; /* Ajuste conforme necessário */
   height: auto;
+  margin-top: 60px;
 }
 
 .botao-foto {
-  margin-top: -460px;
+  margin-top: -190px;
   margin-right: center;
   color: #5db075;
   background-color: white;
+}
+
+.photoSalva{
+  border-radius: 20px;
+  width: 100%; /* Ajuste conforme necessário */
+  height: auto;
+  margin-top: 30px;
+}
+
+.botao-delete{
+  margin-top: 390px;
+  margin-right: center;
+  color: #5db075;
+  background-color: white;
+  position: absolute;
+}
+
+.text-labelBaterias{
+  color: #5db075;
+  font-family: 'Inter', sans-serif;
+  font-variation-settings: 'slnt' 0;
+  font-style: bold;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  margin-top: -360px;
+}
+
+.botao-enviar{
+  margin-top: -190px;
+  color: #5db075;
+  background-color: white;
+}
+
+.text-labelTituloRecompensas{
+  position: absolute;
+  margin-top: -690px;
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'slnt' 0;
+  font-style: bold;
+  font-weight: 600;
+  font-size: 35px;
+  line-height: 36px;
+  text-align: left;
+  color: white;
 }
