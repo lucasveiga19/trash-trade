@@ -41,7 +41,7 @@
         color="white"
       />
 
-      <q-btn label="Enviar" type="submit" class="full-width botao-enviar" />
+      <q-btn label="Enviar" type="submit" class="botao-enviar" />
     </q-form>
   </q-page>
 </template>
@@ -186,7 +186,7 @@ export default {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-      this.photo = canvas.toDataURL('image/webp', 0.2);
+      this.photo = canvas.toDataURL('image/webp', 0.9);
 
       // Para parar a câmera após tirar a foto
       this.stream.getTracks().forEach((track) => track.stop());

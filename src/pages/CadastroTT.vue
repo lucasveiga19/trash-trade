@@ -76,7 +76,6 @@ export default {
         );
 
         const userExists = checkResponse.data.some((user) => {
-          console.log('Comparando:', user.registration, this.matricula); // Log da comparação
           return user.registration.toString() === this.matricula;
         });
 
@@ -90,7 +89,7 @@ export default {
           return;
         }
 
-        const response = await axios.post(
+        await axios.post(
           'https://trashtrade.onrender.com/api/user',
           {
             registration: this.matricula,
@@ -102,7 +101,7 @@ export default {
             },
           }
         );
-        console.log('Success:', response);
+        
         this.$q.notify({
           color: 'green-4',
           textColor: 'white',

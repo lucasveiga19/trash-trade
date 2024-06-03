@@ -91,8 +91,7 @@ export default {
           });
           return;
         }
-
-        console.log('Success:', checkResponse);
+        
         this.$q.notify({
           color: 'green-4',
           textColor: 'white',

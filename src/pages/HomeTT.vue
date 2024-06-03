@@ -2132,9 +2132,6 @@ export default {
       axios
         .get('https://trashtrade.onrender.com/api/user')
         .then((response) => {
-          console.log('Dados recebidos:', response.data); // Log da resposta completa
-          console.log(this.$store.getters.getMatricula);
-
           const userData = response.data.find(
             (user) =>
               user.registration.toString() ===

@@ -4,6 +4,8 @@
       <div class="text-BotaoRetorno">&lt;</div>
     </q-btn>
 
+    <div class="centered-square-Recompensa"></div>
+
     <div class="container-Premios">
       <q-carousel
         v-model="slide"
@@ -30,7 +32,6 @@
       </q-carousel>
     </div>
 
-    <div class="centered-square-Recompensa"></div>
     <div class="text-Premios">Prêmios do mês</div>
 
     <div class="centered-square-Duvidas">
